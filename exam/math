@@ -1,0 +1,7 @@
+import math
+
+side1 = float(input("첫 번째 변의 길이 : "))
+side2 = float(input("두 번째 변의 길이 : "))
+
+hypotenuse = math.sqrt(side1**2 + side2**2)
+print("빗변의 길이 :", hypotenuse)
