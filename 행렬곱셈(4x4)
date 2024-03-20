@@ -1,0 +1,41 @@
+import numpy as np
+
+def sq_dis1(a, b):
+    a_np = np.array(a)
+    b_np = np.array(b)
+    return np.sum((a_np - b_np) ** 2)
+
+def sq_dis2(b, c):
+    b_np = np.array(b)
+    c_np = np.array(c)
+    return np.sum((b_np - c_np) ** 2)
+
+def sq_dis3(a, c):
+    a_np = np.array(a)
+    c_np = np.array(c)
+    return np.sum((a_np - c_np) ** 2)
+
+a = [[0,1,1,0],
+     [0,1,1,0],
+     [0,1,1,0],
+     [0,1,1,0]]
+
+b = [[0,0,0,0],
+     [1,1,1,1],
+     [1,1,1,1],
+     [0,0,0,0]]
+
+c = [[0,1,1,0],
+     [0,1,1,0],
+     [0,0,1,1],
+     [0,1,1,0]]
+
+distance1 = sq_dis1(a, b)
+distance2 = sq_dis2(b, c)
+distance3 = sq_dis3(a, c)
+
+print(distance1)
+print("\n")
+print(distance2)
+print("\n")
+print(distance3)
