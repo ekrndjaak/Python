@@ -9,6 +9,7 @@ from sklearn.datasets import load_iris
 iris_data = pd.read_csv("https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data", header=None)
 iris = load_iris()
 df = pd.DataFrame(iris.data, columns=iris.feature_names)
+
 df['class'] = iris.target
 
 iris_data.columns = ["sepal_length", "sepal_width", "petal_length", "petal_width", "iris_class"]
@@ -65,3 +66,4 @@ print(mean_virginica)
 print("\n")
 print("viginica의 표본 분산:")
 print(var_virginica)
+ 
