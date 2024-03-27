@@ -30,40 +30,33 @@ setosa_data = df[df['class'] == 0].iloc[:, :-1]
 mean_setosa = setosa_data.mean()
 var_setosa = setosa_data.var(ddof=1)
 
-versicolor_data = df[df['class']==0].iloc[:, :-1]
+versicolor_data = df[df['class']==1].iloc[:, :-1]
 mean_versicolor = versicolor_data.mean()
 var_versicolor = versicolor_data.var(ddof=1)
 
-virginica_data = df[df['class']==0].iloc[:, :-1]
+virginica_data = df[df['class']==2].iloc[:, :-1]
 mean_virginica = virginica_data.mean()
 var_virginica = virginica_data.var(ddof=1)
-
-
-
 
 print("평균 :       ", mean_sepal_length,"       ", mean_sepal_width,"        ",
        mean_petal_length,"       ", mean_petal_width)
 print("분산 :       ", var_sepal_length.round(2),"       ", var_sepal_width.round(2)
       ,"        ",var_petal_length.round(2),"       ", var_petal_width.round(2))
-
 print("\n")
 print("setosa의 평균:")
 print(mean_setosa)
 print("\n")
-print("setosa의 표본 분산:")
+print("setosa의 분산:")
 print(var_setosa)
-
 print("\n")
 print("versicolor의 평균:")
 print(mean_versicolor)
 print("\n")
-print("versicolor의 표본 분산:")
+print("versicolor의 분산:")
 print(var_versicolor)
-
 print("\n")
 print("virginica의 평균:")
 print(mean_virginica)
 print("\n")
-print("viginica의 표본 분산:")
+print("viginica의 분산:")
 print(var_virginica)
- 
