@@ -1,17 +1,28 @@
 import pandas as pd
+import numpy as np
 from sklearn.datasets import load_iris
-import matplotlib.pyplot as plt
 
-iris_data = pd.read_csv("https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data", header=None)
-iris = load_iris()
-df = pd.DataFrame(iris.data, columns=iris.feature_names)
 
-iris_data.columns =["sepal_lenghth", "sepal_width", "petal_length", "petal_width", "iris_class"]
+def avr(A, B):
+    sum = 0
+    for i in range(30):
+        sum += A[i][B]
+    output = sum/30
+    return output
 
-print(iris_data.to_string())
+def var(A,B):
+    avg = avr(A,B)
+    diff = 0
+    for i in range(len(A)):
+        diff += (A[i][B] - avg) **2
+    var_output = diff / len(A)
+    return var_output
 
-plt.xlabel('length')
-plt.xlabel('width')
-plt.scatter(iris_data['sepal_length', 'sepal_width'])
-plt.show()
+Iris = load_iris()
+Iris_Data = pd.DataFrame(data=Iris['data'], columns=Iris['feature_names'])
+iris_data = np.array([])
+iris_data = np.array(Iris_Data.iloc[:])
+print(iris_data.shape)
 
+print(avr(iris_data,0))
+print(var(iris_data, 0))

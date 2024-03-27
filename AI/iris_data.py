@@ -1,62 +1,116 @@
-# 150개의 평균분산 4번 clear
-# A만 가지고 평균분산 4개
-# B만 가지고 평균분산 4개
-# C만 가지고 평균분산 4개
-
 import pandas as pd
-from sklearn.datasets import load_iris
+import numpy
+import sys
 
+
+tmp_list=[]
+all_avg_list=[]
+all_var_list=[]
+setosa_avg_list=[]
+setosa_tmp=[]
+setosa_var_list=[]
+versicolor_avg_list=[]
+versicolor_tmp=[]
+versicolor_var_list=[]
+virginica_avg_list=[]
+virginica_tmp=[]
+virginica_var_list=[]
+
+setosa30_avg_list=[]
+setosa30_var_list=[]
+versicolor30_avg_list=[]
+versicolor30_var_list=[]
+virginica30_avg_list=[]
+virginica30_var_list=[]
+sum=0.0
+# URL에서 데이터 다운로드
 iris_data = pd.read_csv("https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data", header=None)
-iris = load_iris()
-df = pd.DataFrame(iris.data, columns=iris.feature_names)
 
-df['class'] = iris.target
-
+# 열 이름 설정
 iris_data.columns = ["sepal_length", "sepal_width", "petal_length", "petal_width", "iris_class"]
 
-print(iris_data.to_string())
+# NumPy 배열로 변환
+iris_matrix = iris_data.values
 
-mean_sepal_length = round(iris_data['sepal_length'].mean(),2)
-mean_sepal_width = round(iris_data['sepal_width'].mean(),2)
-mean_petal_length = round(iris_data['petal_length'].mean(), 2)
-mean_petal_width = round(iris_data['petal_width'].mean(), 2)
+# 결과 출력
 
-var_sepal_length = df['sepal length (cm)'].var(ddof=1)
-var_sepal_width = df['sepal width (cm)'].var(ddof=1)
-var_petal_length = df['petal length (cm)'].var(ddof=1)
-var_petal_width = df['petal width (cm)'].var(ddof=1)
+for i in range(len(iris_matrix[0])-1):
+    for j in range(len(iris_matrix)):
+        sum += float(iris_matrix[j][i])
+        tmp_list.append(iris_matrix[j][i])
+    all_avg_list.append(round(sum/150,2))
+    all_var_list.append(round(numpy.var(tmp_list),2))
+    sum=0.0
+    tmp_list=[]
 
-setosa_data = df[df['class'] == 0].iloc[:, :-1]
-mean_setosa = setosa_data.mean()
-var_setosa = setosa_data.var(ddof=1)
+for i in range(len(iris_matrix[0])-1):
+    for j in range(0,50):
+        sum += float(iris_matrix[j][i])
+        setosa_tmp.append(iris_matrix[j][i])
+    setosa_avg_list.append(round(sum/50,2))
+    setosa_var_list.append(round(numpy.var(setosa_tmp),2))
+    setosa_tmp=[]
+    sum=0.0
 
-versicolor_data = df[df['class']==1].iloc[:, :-1]
-mean_versicolor = versicolor_data.mean()
-var_versicolor = versicolor_data.var(ddof=1)
+for i in range(len(iris_matrix[0])-1):
+    for j in range(0,30):
+        sum += float(iris_matrix[j][i])
+        setosa_tmp.append(iris_matrix[j][i])
+    setosa30_avg_list.append(round(sum/30,2))
+    setosa30_var_list.append(round(numpy.var(setosa_tmp),2))
+    setosa_tmp=[]
+    sum=0.0
 
-virginica_data = df[df['class']==2].iloc[:, :-1]
-mean_virginica = virginica_data.mean()
-var_virginica = virginica_data.var(ddof=1)
+for i in range(len(iris_matrix[0])-1):
+    for j in range(50,100):
+        sum += float(iris_matrix[j][i])
+        versicolor_tmp.append(iris_matrix[j][i])
+    versicolor_avg_list.append(round(sum/50,2))
+    versicolor_var_list.append(round(numpy.var(versicolor_tmp),2))
+    sum=0.0
+    versicolor_tmp=[]
 
-print("평균 :       ", mean_sepal_length,"       ", mean_sepal_width,"        ",
-       mean_petal_length,"       ", mean_petal_width)
-print("분산 :       ", var_sepal_length.round(2),"       ", var_sepal_width.round(2)
-      ,"        ",var_petal_length.round(2),"       ", var_petal_width.round(2))
-print("\n")
-print("setosa의 평균:")
-print(mean_setosa)
-print("\n")
-print("setosa의 분산:")
-print(var_setosa)
-print("\n")
-print("versicolor의 평균:")
-print(mean_versicolor)
-print("\n")
-print("versicolor의 분산:")
-print(var_versicolor)
-print("\n")
-print("virginica의 평균:")
-print(mean_virginica)
-print("\n")
-print("viginica의 분산:")
-print(var_virginica)
+for i in range(len(iris_matrix[0])-1):
+    for j in range(50,80):
+        sum += float(iris_matrix[j][i])
+        versicolor_tmp.append(iris_matrix[j][i])
+    versicolor30_avg_list.append(round(sum/30,2))
+    versicolor30_var_list.append(round(numpy.var(versicolor_tmp),2))
+    sum=0.0
+    versicolor_tmp=[]
+
+for i in range(len(iris_matrix[0])-1):
+    for j in range(100,150):
+        sum += float(iris_matrix[j][i])
+        virginica_tmp.append(iris_matrix[j][i])
+    virginica_avg_list.append(round(sum/50,2))
+    virginica_var_list.append(round(numpy.var(virginica_tmp),2))
+    sum=0.0
+    virginica_tmp=[]
+
+for i in range(len(iris_matrix[0])-1):
+    for j in range(100,130):
+        sum += float(iris_matrix[j][i])
+        virginica_tmp.append(iris_matrix[j][i])
+    virginica30_avg_list.append(round(sum/30,2))
+    virginica30_var_list.append(round(numpy.var(virginica_tmp),2))
+    sum=0.0
+    virginica_tmp=[]
+
+print("Iris 데이터 행렬:")
+print(iris_matrix)
+print("평균: ",all_avg_list)
+print("분산: ", all_var_list)
+print("setosa avg: ",setosa_avg_list)
+print("setosa var: ", setosa_var_list)
+print("versicolor avg: ",versicolor_avg_list)
+print("versicolor var: ",versicolor_var_list)
+print("virginica avg: ",virginica_avg_list)
+print("virginica var:", virginica_var_list)
+
+print("setosa30 avg: ",setosa30_avg_list)
+print("setosa30 var: ", setosa30_var_list)
+print("versicolor30 avg: ", versicolor30_avg_list)
+print("versicolor30 var: ", versicolor30_var_list)
+print("virginica30 avg: ",virginica_avg_list)
+print("virginca30 var: ", virginica_var_list)
