@@ -7,4 +7,4 @@ for _ in range(a):
     case.append((A, B))
 
 for i, (A, B) in enumerate(case, start=1):
-    print("Case #{} : {}".format(i, A + B))
+    print("Case #{}: {} + {} = {}".format(i, A, B, A + B))
