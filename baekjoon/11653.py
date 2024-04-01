@@ -1,4 +1,9 @@
 num = int(input())
-total = 0
-for i in range(num):
-    
+c = 2
+
+while num>1:
+    if num %c == 0:
+        print(c)
+        num //= c
+    else:
+        c += 1
