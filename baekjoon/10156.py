@@ -1,7 +1,7 @@
 K, N ,M = map(int,input().split())
-total = 0
-sum = 0
-re= 0
-
-sum = K + N
-total = 
+sum = K * N
+total_price = sum - M
+if total_price<=0:
+    print("0")
+if total_price>0:
+    print(total_price)
