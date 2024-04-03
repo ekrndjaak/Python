@@ -1,9 +1,9 @@
-from sklearn import datasets
+from sklearn.datasets import load_iris
 from sklearn.cluster import KMeans
 import numpy as np
 
-# iris 데이터 로드
-iris = datasets.load_iris()
+# iris 데이터 불러오기
+iris = load_iris()
 X = iris.data
 
 # 데이터를 A, B, C로 나누기
@@ -11,30 +11,35 @@ A = X[:50]
 B = X[50:100]
 C = X[100:]
 
-# KMeans 모델 생성 및 학습
-kmeans_A = KMeans(n_clusters=3, random_state=42).fit(A)
-kmeans_B = KMeans(n_clusters=3, random_state=42).fit(B)
-kmeans_C = KMeans(n_clusters=3, random_state=42).fit(C)
+# KMeans 모델 초기화
+kmeans = KMeans(n_clusters=3, random_state=42)
 
-# 각 군집의 중심점 확인
-means_A = np.round(kmeans_A.cluster_centers_, 2)
-means_B = np.round(kmeans_B.cluster_centers_, 2)
-means_C = np.round(kmeans_C.cluster_centers_, 2)
+# A에 대한 k-means 클러스터링
+kmeans.fit(A)
+A_cluster_centers = kmeans.cluster_centers_
+A_cluster_mean = np.mean(A_cluster_centers, axis=0)
 
-# 중심점의 평균 계산
-total_means = np.round(np.mean([means_A, means_B, means_C], axis=0), 2)
+# B에 대한 k-means 클러스터링
+kmeans.fit(B)
+B_cluster_centers = kmeans.cluster_centers_
+B_cluster_mean = np.mean(B_cluster_centers, axis=0)
 
-# 3-mean의 평균 출력
-print("A의 3-mean:")
-print(means_A)
-print("\nB의 3-mean:")
-print(means_B)
-print("\nC의 3-mean:")
-print(means_C)
-print("\nA, B, C의 3-mean의 평균:")
-print(total_means)
+# C에 대한 k-means 클러스터링
+kmeans.fit(C)
+C_cluster_centers = kmeans.cluster_centers_
+C_cluster_mean = np.mean(C_cluster_centers, axis=0)
 
-# 3-mean 값들을 비교하기 쉽게 정렬
-sorted_means = np.sort(total_means, axis=0)
-print("\n정렬된 3-mean 값들:")
-print(sorted_means)
+# 클러스터 중심 평균을 출력
+print("A 클러스터 중심 평균:", A_cluster_mean)
+print("B 클러스터 중심 평균:", B_cluster_mean)
+print("C 클러스터 중심 평균:", C_cluster_mean)
+
+# 클러스터 중심 평균을 비교하기 쉽게 정렬
+cluster_means = np.vstack([A_cluster_mean, B_cluster_mean, C_cluster_mean])
+sorted_indices = np.argsort(np.sum(cluster_means, axis=1))
+sorted_cluster_means = cluster_means[sorted_indices]
+
+# 정렬된 클러스터 중심 평균 출력
+print("정렬된 클러스터 중심 평균:")
+for i, mean in enumerate(sorted_cluster_means):
+    print(f"Cluster {i+1}: {mean}")
