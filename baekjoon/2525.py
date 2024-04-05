@@ -12,6 +12,7 @@ while(mh >= 60):
     if(mh <60):
         break
     
+
 if(h >= 24):
     h = h-24
 
