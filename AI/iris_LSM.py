@@ -23,6 +23,5 @@ Iris_Data = pd.DataFrame(data=Iris['data'], columns=Iris['feature_names'])
 iris_data = np.array([])
 iris_data = np.array(Iris_Data.iloc[:])
 print(iris_data.shape)
-
 print(avr(iris_data,0))
 print(var(iris_data, 0))
